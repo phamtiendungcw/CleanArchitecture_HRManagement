@@ -1,4 +1,5 @@
 ﻿using HR.Management.Application.Contracts.Persistence;
+using HR.Management.Application.Exceptions;
 using MediatR;
 
 namespace HR.Management.Application.Features.LeaveType.Commands.DeleteLeaveType
@@ -18,6 +19,8 @@ namespace HR.Management.Application.Features.LeaveType.Commands.DeleteLeaveType
             var leaveTypeToDelete = await _leaveTypeRepository.GetByIdAsync(request.Id);
 
             // Verify that record exists
+            if (leaveTypeToDelete == null)
+                throw new NotFoundException(nameof(LeaveType), request.Id);
 
             // Remove form database
             await _leaveTypeRepository.DeleteAsync(leaveTypeToDelete);
