@@ -33,7 +33,6 @@ namespace HR.Management.Persistence.Repositories
 
         public async Task<T> GetByIdAsync(int id)
         {
-
             return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
