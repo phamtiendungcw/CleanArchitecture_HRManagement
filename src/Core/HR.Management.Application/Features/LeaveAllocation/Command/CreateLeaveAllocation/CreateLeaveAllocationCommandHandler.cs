@@ -24,12 +24,12 @@ namespace HR.Management.Application.Features.LeaveAllocation.Command.CreateLeave
             var validator = new CreateLeaveAllocationCommandValidator(_leaveTypeRepository);
             var validationResult = await validator.ValidateAsync(request);
             if (validationResult.Errors.Any())
-                throw new BadRequestException("Invalid Allocation", validationResult);
+                throw new BadRequestException("Invalid leave allocation request", validationResult);
 
-            var leaveAllcationToCreate = _mapper.Map<Domain.LeaveAllocation>(request);
-            await _leaveAllocationRepository.CreateAsync(leaveAllcationToCreate);
+            var leaveAllocationToCreate = _mapper.Map<Domain.LeaveAllocation>(request);
+            await _leaveAllocationRepository.CreateAsync(leaveAllocationToCreate);
 
-            return leaveAllcationToCreate.Id;
+            return leaveAllocationToCreate.Id;
         }
     }
 }

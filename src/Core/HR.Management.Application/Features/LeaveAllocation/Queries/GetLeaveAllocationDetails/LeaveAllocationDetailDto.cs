@@ -9,7 +9,5 @@ namespace HR.Management.Application.Features.LeaveAllocation.Queries.GetLeaveAll
         public LeaveTypeDto LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
         public int Period { get; set; }
-        public DateTime? DateCreated { get; set; }
-        public DateTime? DateModified { get; set; }
     }
 }

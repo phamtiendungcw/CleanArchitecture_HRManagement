@@ -4,6 +4,7 @@ namespace HR.Management.Application.Features.LeaveAllocation.Queries.GetAllLeave
 {
     public class LeaveAllocationDto
     {
+        public int Id { get; set; }
         public int NumberOfDays { get; set; }
         public LeaveTypeDto LeaveType { get; set; }
         public int LeaveTypeId { get; set; }

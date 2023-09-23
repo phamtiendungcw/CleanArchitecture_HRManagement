@@ -18,7 +18,7 @@ namespace HR.Management.Application.Features.LeaveAllocation.Queries.GetLeaveAll
 
         public async Task<LeaveAllocationDetailDto> Handle(GetLeaveAllocationDetailQuery request, CancellationToken cancellationToken)
         {
-            var leaveAllocation = await _leaveAllocationRepository.GetByIdAsync(request.id);
+            var leaveAllocation = await _leaveAllocationRepository.GetLeaveAllocationWithDetails(request.id);
 
             if (leaveAllocation == null)
                 throw new NotFoundException(nameof(Domain.LeaveAllocation), request.id);
