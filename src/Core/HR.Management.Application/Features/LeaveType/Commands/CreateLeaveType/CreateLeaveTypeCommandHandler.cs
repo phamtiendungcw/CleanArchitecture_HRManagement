@@ -22,7 +22,7 @@ namespace HR.Management.Application.Features.LeaveType.Commands.CreateLeaveType
             var validator = new CreateLeaveTypeCommandValidator(_leaveTypeRepository);
             var validationResult = await validator.ValidateAsync(request);
             if (validationResult.Errors.Any())
-                throw new BadRequestException("Invalid LeaveType", validationResult);
+                throw new BadRequestException("Invalid leave type", validationResult);
 
             // Convert to domain entity obj
             var leaveTypeToCreate = _mapper.Map<Domain.LeaveType>(request);
