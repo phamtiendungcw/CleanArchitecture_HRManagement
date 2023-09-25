@@ -23,15 +23,15 @@ namespace HR.Management.API.Controllers
 
         // GET: api/<LeaveTypeController>
         [HttpGet]
-        public async Task<List<LeaveTypeDto>> Get()
+        public async Task<List<LeaveTypeListDto>> Get()
         {
-            var leaveTypes = await _mediator.Send(new GetLeaveTypesQuery());
+            var leaveTypes = await _mediator.Send(new GetLeaveTypesListQuery());
             return leaveTypes;
         }
 
         // GET api/<LeaveTypeController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<LeaveTypeDto>> Get(int id)
+        public async Task<ActionResult<LeaveTypeListDto>> Get(int id)
         {
             var leaveType = await _mediator.Send(new GetLeaveTypeDetailQuery(id));
             return Ok(leaveType);
@@ -49,7 +49,7 @@ namespace HR.Management.API.Controllers
         }
 
         // PUT api/<LeaveTypeController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

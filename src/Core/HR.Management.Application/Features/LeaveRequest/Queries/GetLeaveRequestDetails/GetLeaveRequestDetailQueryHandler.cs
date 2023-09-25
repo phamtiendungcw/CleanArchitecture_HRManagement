@@ -18,7 +18,7 @@ namespace HR.Management.Application.Features.LeaveRequest.Queries.GetLeaveReques
 
         public async Task<LeaveRequestDetailDto> Handle(GetLeaveRequestDetailQuery request, CancellationToken cancellationToken)
         {
-            var leaveRequest = await _leaveRequestRepository.GetByIdAsync(request.id);
+            var leaveRequest = await _leaveRequestRepository.GetLeaveRequestWithDetails(request.id);
 
             if (leaveRequest == null)
                 throw new NotFoundException(nameof(Domain.LeaveRequest), request.id);

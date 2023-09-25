@@ -11,7 +11,7 @@ namespace HR.Management.Application.MappingProfiles
     {
         public LeaveRequestProfile()
         {
-            CreateMap<LeaveRequestDto, LeaveRequest>().ReverseMap();
+            CreateMap<LeaveRequestListDto, LeaveRequest>().ReverseMap();
             CreateMap<LeaveRequest, LeaveRequestDetailDto>();
             CreateMap<CreateLeaveRequestCommand, LeaveRequest>();
             CreateMap<UpdateLeaveRequestCommand, LeaveRequest>();

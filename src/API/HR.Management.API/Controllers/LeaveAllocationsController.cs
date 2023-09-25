@@ -4,7 +4,6 @@ using HR.Management.Application.Features.LeaveAllocation.Command.UpdateLeaveAllo
 using HR.Management.Application.Features.LeaveAllocation.Queries.GetAllLeaveAllocations;
 using HR.Management.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,7 +12,7 @@ namespace HR.Management.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class LeaveAllocationsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -25,15 +24,15 @@ namespace HR.Management.API.Controllers
 
         // GET: api/<LeaveAlloctionController>
         [HttpGet]
-        public async Task<List<LeaveAllocationDto>> Get()
+        public async Task<List<LeaveAllocationListDto>> Get()
         {
-            var leaveAllocations = await _mediator.Send(new GetLeaveAllocationsQuery());
+            var leaveAllocations = await _mediator.Send(new GetLeaveAllocationsListQuery());
             return leaveAllocations;
         }
 
         // GET api/<LeaveAlloctionController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<LeaveAllocationDto>> Get(int id)
+        public async Task<ActionResult<LeaveAllocationListDto>> Get(int id)
         {
             var leaveAllocation = await _mediator.Send(new GetLeaveAllocationDetailQuery(id));
             return Ok(leaveAllocation);
@@ -51,12 +50,12 @@ namespace HR.Management.API.Controllers
         }
 
         // PUT api/<LeaveAlloctionController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Put(int id, [FromBody] UpdateLeaveAllocationCommand leaveAllocation)
+        public async Task<ActionResult> Put([FromBody] UpdateLeaveAllocationCommand leaveAllocation)
         {
             await _mediator.Send(leaveAllocation);
             return NoContent();

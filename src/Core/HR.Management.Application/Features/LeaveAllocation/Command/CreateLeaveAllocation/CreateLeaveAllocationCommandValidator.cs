@@ -10,10 +10,15 @@ namespace HR.Management.Application.Features.LeaveAllocation.Command.CreateLeave
         public CreateLeaveAllocationCommandValidator(ILeaveTypeRepository leaveTypeRepository)
         {
             _leaveTypeRepository = leaveTypeRepository;
+            RuleFor(p => p.NumberOfDays)
+                .GreaterThan(0).WithMessage("{PropertyName} must greater than {ComparisonValue}");
             RuleFor(p => p.LeaveTypeId)
                 .GreaterThan(0)
                 .MustAsync(LeaveTypeMustExist)
                 .WithMessage("{PropertyName} does not exist.");
+            RuleFor(p => p.Period)
+                .GreaterThanOrEqualTo(DateTime.Now.Year).WithMessage("{PropertyName} must be after {ComparisonValue}");
+
         }
 
         private async Task<bool> LeaveTypeMustExist(int id, CancellationToken arg2)
