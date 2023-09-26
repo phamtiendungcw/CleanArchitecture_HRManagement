@@ -22,7 +22,8 @@ namespace HR.Management.Persistence.DatabaseContext
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in base.ChangeTracker.Entries<BaseEntity>().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified))
+            foreach (var entry in base.ChangeTracker.Entries<BaseEntity>()
+                         .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified))
             {
                 entry.Entity.DateModified = DateTime.Now;
                 if (entry.State == EntityState.Added)

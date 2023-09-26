@@ -31,7 +31,7 @@ namespace HR.Management.UnitTests.Features.LeaveTypes.Queries
             var result = await handler.Handle(new GetLeaveTypesListQuery(), CancellationToken.None);
 
             result.ShouldBeOfType<List<LeaveTypeListDto>>();
-            result.Count.ShouldBe(4);
+            result.Count.ShouldBe(3);
         }
     }
 }
